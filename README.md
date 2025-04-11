@@ -1,1 +1,1 @@
-"# Reposit¢rio criado para a disciplina Orienta‡Æo a Objetos do curso de Ciˆncia da Computa‡Æo." 
+* Repository created for the Object Orientation discipline of the Computer Science course.
