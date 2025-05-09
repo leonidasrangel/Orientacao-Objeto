@@ -5,8 +5,8 @@
  */
 package cadmusica;
 
+import classes.GerenciadorMusicas;
 import classes.Musica;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,64 +20,92 @@ public class CadMusica {
         Scanner leitor = new Scanner(System.in);
 
         System.out.println("------------------------------");
-        System.out.println("1 - Inserir música");
-        System.out.println("2 - Remover música");
-        System.out.println("3 - Pesquisar pelo nome da música");
-        System.out.println("4 - Pesquisar pelo artista");
-        System.out.println("0 - Sair");
+        System.out.println("1 - Inserir música.");
+        System.out.println("2 - Pesquisar pelo nome da música."); 
+        System.out.println("3 - Pesquisar pelo nome do artista."); 
+        System.out.println("4 - Listar todas as musicas cadastradas."); 
+        System.out.println("5 - Remover música por nome.");
+        System.out.println("6 - Remover música por artista.");
+        System.out.println("0 - Sair.");
         System.out.println("-----------------------------");
-        System.out.println("Escolha uma opção:");
+        System.out.print("Escolha uma opção: ");
 
-        return leitor.nextInt();
+        int opcao = leitor.nextInt();
+        leitor.nextLine();
+        return opcao;
     }
      
     public static void main(String[] args) {
-        List<Musica> listaMusicas;
-        listaMusicas = new ArrayList<Musica>();
+        GerenciadorMusicas gerenciadorMusicas = new GerenciadorMusicas();
         Scanner leitor = new Scanner(System.in);
-        int opcao = 0;
+        int opcao;
         
         do {
             opcao = imprimeMenu();
-            if (opcao == 1) { //insercao
-                Musica M1 = new Musica();
-                M1.preencher();
-                listaMusicas.add(M1);
-            } else if (opcao == 2) {//remocao
-                System.out.println("Informe a música:");
-                String music = leitor.nextLine();
-
-                for (int i = 0; i <= listaMusicas.size() - 1; i++) {
-                    Musica M1 = listaMusicas.get(i);
-                    if (music.equals(M1.getTitulo())) {
-                        System.out.println("Música encontrada e removida");
-                        listaMusicas.remove(M1);
+            switch(opcao){
+                case 1: {
+                    Musica novaMusica = new Musica();
+                    novaMusica.preencher();
+                    gerenciadorMusicas.adicionarMusica(novaMusica);
+                    break;
+                }
+                case 2: {
+                    System.out.println("Informe o nome da música para pesquisar: ");
+                    String titulo = leitor.nextLine();
+                    
+                    Musica musica = gerenciadorMusicas.pesquisarMusicaTitulo(titulo);
+                    if (musica != null){
+                        musica.imprimir();
+                    }else {
+                        System.out.println("Musica não encontrada.");
                     }
-                }                
-            } else if (opcao == 3) {//pesquisa titulo
-                System.out.println("Informe o artista:");
-                String music = leitor.nextLine();
-
-                for (int i = 0; i <= listaMusicas.size() - 1; i++) {
-                    Musica M1 = listaMusicas.get(i);
-                    if (music.equals(M1.getTitulo())) {
-                        System.out.println("Música encontrada");
-                        M1.imprimir();
+                    break;
+                }
+                case 3: {
+                    System.out.println("Informe o nome do artista para pesquisar: ");
+                    String artista = leitor.nextLine();
+                    
+                    List<Musica> musicaArtista = gerenciadorMusicas.pesquisarMusicaArtista(artista);
+                    if(musicaArtista.isEmpty()){
+                        System.out.println("Nenhuma musica encontrada para esse artista.");
+                    }else{
+                        for(Musica m1 : musicaArtista){
+                            m1.imprimir();
+                        }
                     }
-                }                
-            } else if (opcao == 4) { //pesquisa autor               
-                System.out.println("Informe o artista:");
-                String artist = leitor.nextLine();
-
-                for (int i = 0; i <= listaMusicas.size() - 1; i++) {
-                    Musica M1 = listaMusicas.get(i);
-                    if (artist.equals(M1.getArtista())) {
-                        System.out.println("Artista encontrado");
-                        M1.imprimir();
+                    break;
+                }
+                case 4: {
+                    System.out.println("Músicas cadastradas:");
+                    gerenciadorMusicas.imprimirTodasMusicas();
+                    break;
+                }
+                case 5: {
+                    System.out.println("Informe o nome da música para remover:");
+                    String titulo = leitor.nextLine();
+                    
+                    if(gerenciadorMusicas.removerMusicaTitulo(titulo)){
+                        System.out.println("Música removida com sucesso.");
+                    }else {
+                        System.out.println("Música não encontrada.");
                     }
+                    break;
+                }
+                case 6: {
+                    System.out.println("Informe o nome do artista para remover:");
+                    String artista = leitor.nextLine();
+                    
+                    if(gerenciadorMusicas.removerMusicaArtista(artista)){
+                        System.out.println("Música removida com sucesso.");
+                    }else {
+                        System.out.println("Música não encontrada.");
+                    }
+                    break;
                 }
             }
-        } while (opcao != 0);
+            
+        }while (opcao != 0);
+        leitor.close();
     }
     
 }

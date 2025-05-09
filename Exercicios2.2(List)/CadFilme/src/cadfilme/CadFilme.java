@@ -6,6 +6,7 @@
 package cadfilme;
 
 import classes.Filme;
+import classes.GerenciadorFilmes;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -20,63 +21,92 @@ public class CadFilme {
         Scanner leitor = new Scanner(System.in);
 
         System.out.println("------------------------------");
-        System.out.println("1 - Inserir filme");
-        System.out.println("2 - Remover filme");
-        System.out.println("3 - Pesquisar pelo nome do filme");
-        System.out.println("4 - Pesquisar pelo diretor do filme");
+        System.out.println("1 - Inserir filme.");
+        System.out.println("2 - Pesquisar pelo nome do filme.");
+        System.out.println("3 - Pesquisar pelo diretor do filme.");
+        System.out.println("4 - Listar todos os filmes.");
+        System.out.println("5 - Remover filme pelo nome.");
+        System.out.println("6 - Remover filme pelo nome do diretor.");
         System.out.println("0 - Sair");
         System.out.println("-----------------------------");
-        System.out.println("Escolha uma opção:");
+        System.out.print("Escolha uma opção:");
 
-        return leitor.nextInt();
+        int opcao = leitor.nextInt();
+        leitor.nextLine();
+        return opcao;
     }
-public static void main(String[] args) {
-        List<Filme> listaFilmes;
-        listaFilmes = new ArrayList<Filme>();
+    public static void main(String[] args) {
+        
+        GerenciadorFilmes gerenciadorFilmes = new GerenciadorFilmes();
         Scanner leitor = new Scanner(System.in);
-        int opcao = 0;
+        int opcao;
         
         do {
             opcao = imprimeMenu();
-            if (opcao == 1) { //insercao
-                Filme F1 = new Filme();
-                F1.preencher();
-                listaFilmes.add(F1);
-            } else if (opcao == 2) {//remocao
-                System.out.println("Informe o filme:");
-                String movie = leitor.nextLine();
-
-                for (int i = 0; i <= listaFilmes.size() - 1; i++) {
-                    Filme F1 = listaFilmes.get(i);
-                    if (movie.equals(F1.getTitulo())) {
-                        System.out.println("Filme encontrado e removido");
-                        listaFilmes.remove(F1);
+            switch(opcao){
+                case 1: {
+                    Filme novoFilme = new Filme();
+                    novoFilme.preencher();
+                    gerenciadorFilmes.adicionarFilme(novoFilme);
+                    break;
+                }
+                case 2: {
+                    System.out.println("Informe o nome do filme para pesquisar: ");
+                    String titulo = leitor.nextLine();
+                    
+                    Filme filme = gerenciadorFilmes.pesquisarFilmeTitulo(titulo);
+                    if (filme != null){
+                        filme.imprimir();
+                    }else {
+                        System.out.println("Filme não encontrado.");
                     }
-                }                
-            } else if (opcao == 3) {//pesquisa titulo
-                System.out.println("Informe o titulo:");
-                String movie = leitor.nextLine();
-
-                for (int i = 0; i <= listaFilmes.size() - 1; i++) {
-                    Filme F1 = listaFilmes.get(i);
-                    if (movie.equals(F1.getTitulo())) {
-                        System.out.println("Filme encontrado");
-                        F1.imprimir();
+                    break;
+                }
+                case 3: {
+                    System.out.println("Informe o nome do diretor para pesquisar: ");
+                    String diretor = leitor.nextLine();
+                    
+                    List<Filme> filmeDiretor = gerenciadorFilmes.pesquisarFilmeDiretor(diretor);
+                    if(filmeDiretor.isEmpty()){
+                        System.out.println("Nenhum filme encontrado para esse diretor.");
+                    }else{
+                        for(Filme F1 : filmeDiretor){
+                            F1.imprimir();
+                        }
                     }
-                }                
-            } else if (opcao == 4) { //pesquisa autor               
-                System.out.println("Informe o diretor:");
-                String director = leitor.nextLine();
-
-                for (int i = 0; i <= listaFilmes.size() - 1; i++) {
-                    Filme F1 = listaFilmes.get(i);
-                    if (director.equals(F1.getDiretor())) {
-                        System.out.println("Diretor encontrado");
-                        F1.imprimir();
+                    break;
+                }
+                case 4: {
+                    System.out.println("Filmes cadastrados:");
+                    gerenciadorFilmes.imprimirTodosFilmes();
+                    break;
+                }
+                case 5: {
+                    System.out.println("Informe o nome do filme para remover:");
+                    String titulo = leitor.nextLine();
+                    
+                    if(gerenciadorFilmes.removerFilmeTitulo(titulo)){
+                        System.out.println("Filme removido com sucesso.");
+                    }else {
+                        System.out.println("Filme não encontrado.");
                     }
+                    break;
+                }
+                case 6: {
+                    System.out.println("Informe o nome do diretor para remover:");
+                    String diretor = leitor.nextLine();
+                    
+                    if(gerenciadorFilmes.removerFilmeDiretor(diretor)){
+                        System.out.println("Filme removido com sucesso.");
+                    }else {
+                        System.out.println("Filme não encontrado.");
+                    }
+                    break;
                 }
             }
-        } while (opcao != 0);
+            
+        }while (opcao != 0);
+        leitor.close();
     }
     
 }

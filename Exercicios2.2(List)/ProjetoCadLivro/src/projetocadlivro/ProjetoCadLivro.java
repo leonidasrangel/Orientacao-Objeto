@@ -1,19 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package projetocadlivro;
-
 import classes.Livro;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
+import classes.Biblioteca;
+import java.util.List;
 
-/**
- *
- * @author Rangel
- */
+
 public class ProjetoCadLivro {
 
     public static int printMenu() {
@@ -22,71 +13,90 @@ public class ProjetoCadLivro {
         
         System.out.println("-----------------------------------");
         System.out.println("1 - Insert book");
-        System.out.println("2 - Remove book");
-        System.out.println("3 - Search Book (Title)");
-        System.out.println("4 - Search Book (Author)");
+        System.out.println("2 - Search Book (Title)");
+        System.out.println("3 - Search Book (Author)"); 
+        System.out.println("4 - List all books"); 
+        System.out.println("5 - Remove books by title"); 
+        System.out.println("6 - Remove books by author"); 
         System.out.println("0 - Quit");
         System.out.println("-----------------------------------");
-        System.out.println("Choose an option: ");
+        System.out.print("Choose an option: ");
         
-        return reader.nextInt();
+        int opcao = reader.nextInt();
+        reader.nextLine(); // Consumir newline left-over
+        return opcao;
         
     }
     public static void main(String[] args) {
         
-        List<Livro> listBook;
-        listBook = new ArrayList<Livro>();
+        Biblioteca biblioteca = new Biblioteca();
         Scanner reader = new Scanner(System.in);
-        int option = 0;
+        int option;
         
         do{
         option = printMenu();
-        if(option == 1){
-            Livro L1 = new Livro();
-            L1.preencher();
-            listBook.add(L1);
-            //insert
-        }else if(option == 2){
-            System.out.println("Enter the title:");
-            String title = reader.nextLine();
-            
-            for(int i=0; i<= listBook.size()-1; i++){
-                Livro Li = listBook.get(i);
-                if(title.equals(Li.getTitle())){
-                    System.out.println("Book found");
-                    listBook.remove(Li);
-                    
+        switch (option) {
+                case 1: {
+                    Livro novoLivro = new Livro();
+                    novoLivro.preencher();
+                    biblioteca.adicionarLivro(novoLivro);
+                    break;
                 }
-            }
-        }
-            //remove
-        else if(option == 3){
-            System.out.println("Enter the title:");
-            String title = reader.nextLine();
-            
-            for(int i=0; i<= listBook.size()-1; i++){
-                Livro Li = listBook.get(i);
-                if(title.equals(Li.getTitle())){
-                    System.out.println("Book found");
-                    Li.imprimir();
+                case 2: {
+                    System.out.println("Enter the title of the book to search for:");
+                    String titulo = reader.nextLine();
                     
+                    Livro livro = biblioteca.pesquisarLivroPorTitulo(titulo);
+                    if (livro != null) {
+                        livro.imprimir();
+                    } else {
+                        System.out.println("Book not found.");
+                    }
+                    break;
                 }
-            }
-            //search title
-        }else if(option == 4){
-            System.out.println("Enter the author:");
-            String author = reader.nextLine();
-            
-            for(int i=0; i<= listBook.size()-1; i++){
-                Livro Li = listBook.get(i);
-                if(author.equals(Li.getAuthor())){
-                    System.out.println("Author found");
-                    Li.imprimir();
-            //search author
-        }
-    }
-    
+                case 3: {
+                    System.out.println("Enter the name of the author to search for:");
+                    String autor = reader.nextLine();
+
+                    List<Livro> livrosAutor = biblioteca.pesquisarLivrosPorAutor(autor);
+                    if (livrosAutor.isEmpty()) {
+                        System.out.println("No books found for this author.");
+                    } else {
+                        for (Livro Ll : livrosAutor) {
+                        Ll.imprimir();
+                    }
+                }
+                    break;
+                }
+                case 4: {
+                    System.out.println("Registered books:");
+                    biblioteca.imprimirTodosLivros();
+                    break;
+                }
+
+                case 5: {
+                    System.out.println("Enter the title of the book to remove:");
+                    String titulo = reader.nextLine();
+                    
+                    if (biblioteca.removerLivroTitulo(titulo)) {
+                        System.out.println("Book removed successfully.");
+                    } else {
+                        System.out.println("Book not found.");
+                    }
+                    break;
+                }
+                case 6: {
+                    System.out.println("Enter the title of the book to remove:");
+                    String author = reader.nextLine();
+                    
+                    if (biblioteca.removerLivroPorAutor(author)) {
+                        System.out.println("Book removed successfully.");
+                    } else {
+                        System.out.println("Book not found.");
+                    }
+                    break;
+                }
 }
         }while(option != 0);
+    }
 }
-        }

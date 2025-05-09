@@ -1,16 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package classes;
 
 import java.util.Scanner;
 
-/**
- *
- * @author Rangel
- */
 public class Livro {
     private String title;
     private String author;
@@ -59,8 +50,8 @@ public class Livro {
     public String getAuthor(){
         return this.author;
     }
-    public void setNumberPages(int numeberPages){
-        this.numberPages = numeberPages;
+    public void setNumberPages(int numberPages){
+        this.numberPages = numberPages;
     }
     public int getNumberPages(){
         return this.numberPages;
