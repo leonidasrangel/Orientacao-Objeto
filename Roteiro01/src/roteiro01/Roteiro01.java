@@ -33,7 +33,10 @@ public class Roteiro01 {
                 System.out.println("\nColineares? Não");
             }
 
-            System.out.println("Área do triângulo: " + t.area());
+            double area = t.area();
+            if(area < 0)
+                area = -1*area;
+            System.out.println("Área do triângulo: " + area);
             System.out.println("Perímetro do triângulo: " + t.perimetro());
             System.out.println("Tipo do triângulo: " + t.tipo());
 
