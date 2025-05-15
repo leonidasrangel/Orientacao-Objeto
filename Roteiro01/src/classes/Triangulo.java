@@ -15,6 +15,12 @@ public class Triangulo {
         p3.imprimir();
     }
 
+    @Override
+    public String toString() {
+        return "Triangulo{" + "p1=" + p1 + ", p2=" + p2 + ", p3=" + p3 + '}';
+    }
+    
+
     public boolean isColinear() {
         return determinante() == 0; // Retorna true se o determinante (calculado pelo método 'determinante') for 0, indicando colinearidade.
     }

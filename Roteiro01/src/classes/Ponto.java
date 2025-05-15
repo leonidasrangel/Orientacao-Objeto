@@ -13,6 +13,11 @@ public class Ponto {
         System.out.println("(x: " + this.x + ", y: " + this.y + ")");
     }
 
+    @Override
+    public String toString() {
+        return "Ponto{" + "x=" + x + ", y=" + y + '}';
+    }
+
     public double distancia(Ponto outro) {
         double deltaX = outro.getX() - this.x; // calcula a diferença entre as coordenadas x
         double deltaY = outro.getY() - this.y; // calcula a diferença entre as coordenadas y

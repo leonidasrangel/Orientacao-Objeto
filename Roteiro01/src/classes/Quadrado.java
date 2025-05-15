@@ -18,6 +18,12 @@ public class Quadrado {
         p4.imprimir();
     }
 
+    @Override
+    public String toString() {
+        return "Quadrado{" + "p1=" + p1 + ", p2=" + p2 + ", p3=" + p3 + ", p4=" + p4 + '}';
+    }
+    
+
     public double lado(Ponto a, Ponto b) {
         return a.distancia(b);
     }
