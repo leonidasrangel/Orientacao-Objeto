@@ -1,0 +1,4 @@
+com\mycompany\sistemabanco\classes\Banco.class
+com\mycompany\sistemabanco\classes\Transacao.class
+com\mycompany\sistemabanco\SistemaBanco.class
+com\mycompany\sistemabanco\classes\Conta.class
