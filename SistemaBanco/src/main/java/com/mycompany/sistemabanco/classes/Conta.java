@@ -59,7 +59,7 @@ public class Conta {
     public void depositar(double valor) {
         if (valor > 0) {
             this.saldoAtual += valor;
-            System.out.println("Depósito de R$: " + valor + " realizado com sucesso.");
+            System.out.println("Depósito de R$: " + valor + " realizado com sucesso na conta de " + this.titular + ".");
         } else {
             System.out.println("Valor inválido para depósito.");
         }
@@ -69,13 +69,25 @@ public class Conta {
     public boolean sacar(double valor) {
         if (valor > 0 && valor <= this.saldoAtual) {
             this.saldoAtual -= valor;
-            System.out.println("Saque de R$: " + valor + " realizado com sucesso.");
+            System.out.println("Saque de R$: " + valor + " realizado com sucesso da conta de " + this.titular + ".");
             return true;
         } else {
             System.out.println("Saldo insuficiente ou valor inválido para saque.");
             return false;
         }
     }
+    
+    //Tansferência
+    public void transferir(Conta destino, double valor) {
+        if (valor > 0 && this.saldoAtual >= valor) {
+            this.saldoAtual -= valor;
+            destino.saldoAtual += valor;
+            System.out.println("Transferência de R$: " + valor + " realizada com sucesso de " + this.titular + " para " + destino.titular + ".");
+        } else {
+            System.out.println("Transferência não realizada. Saldo insuficiente ou valor inválido.");
+        }
+    }
+
     
     //Atualizar Saldo
     public void atualizarSaldo(double valor) {
