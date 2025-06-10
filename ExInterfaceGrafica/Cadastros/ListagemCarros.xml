@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Veiculos>
+    <Veiculo>
+        <ano>23</ano>
+        <marca>wew</marca>
+        <modelo>ert</modelo>
+        <preco>3232.23</preco>
+    </Veiculo>
+</Veiculos>

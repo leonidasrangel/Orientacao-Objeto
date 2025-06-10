@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Produtos>
+    <Produto>
+        <cod>001</cod>
+        <custo>20.0</custo>
+        <nome>Arroz</nome>
+        <preco>30.0</preco>
+    </Produto>
+    <Produto>
+        <cod>002</cod>
+        <custo>12.0</custo>
+        <nome>Feijão</nome>
+        <preco>17.5</preco>
+    </Produto>
+    <Produto>
+        <cod>003</cod>
+        <custo>12.89</custo>
+        <nome>Macarrao</nome>
+        <preco>23.0</preco>
+    </Produto>
+    <Produto>
+        <cod>004</cod>
+        <custo>8.0</custo>
+        <nome>Leite</nome>
+        <preco>10.5</preco>
+    </Produto>
+</Produtos>

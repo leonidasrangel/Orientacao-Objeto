@@ -1,52 +1,25 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package gui;
 
-import classes.Pessoa;
-import gerenciador.GerenciadorPessoa;
-import java.awt.Color;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import Classes.Carro;
+import gerenciador.GerenciadorCarro;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Rangel
  */
-public class FrCadPessoa extends javax.swing.JFrame {
-    private String cpfEscolhido;
+public class FrCadCarro extends javax.swing.JFrame {
+
+    private String modeloEscolhido;
     private boolean editando;
-    public GerenciadorPessoa gerente;
-    
-    public FrCadPessoa() {
+    private GerenciadorCarro gerente;
+    public FrCadCarro() {
         initComponents();
-        
         this.editando = false;
-        this.cpfEscolhido = "";
-        this.gerente = new GerenciadorPessoa();
+        this.modeloEscolhido = "";
+        this.gerente = new GerenciadorCarro();
         this.habilitarCampos(false);
         this.limparCampos();
-        
-        gerente.carregarDeXML("ListagemPessoas.xml"); // Isso carrega para arquivo xml
-        //gerente.carregarDoArquivo("ListagemPessoas.json"); //Isso carrega para arquivo .json
-        
-        edtListagem.setText(gerente.toString());
-        
-        this.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-
-        this.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                System.out.println("Salvando dados ao fechar a janela...");
-                
-                gerente.salvarEmXML("ListagemPessoas.xml"); // Isso salva em arquivo xml
-              //gerente.salvarNoArquivo("ListagemPessoas.json"); //Isso salva em arquivo .json
-                
-                System.exit(0);
-            }
-        });
     }
 
     /**
@@ -65,23 +38,23 @@ public class FrCadPessoa extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
-        panDados = new javax.swing.JPanel();
-        lblNome = new javax.swing.JLabel();
-        edtNome = new javax.swing.JTextField();
-        lblCpf = new javax.swing.JLabel();
-        edtCpf = new javax.swing.JTextField();
-        lblIdade = new javax.swing.JLabel();
-        edtIdade = new javax.swing.JTextField();
-        lblSexo = new javax.swing.JLabel();
-        edtSexo = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         edtListagem = new javax.swing.JTextArea();
+        panDados = new javax.swing.JPanel();
+        lblMarca = new javax.swing.JLabel();
+        edtMarca = new javax.swing.JTextField();
+        lblModelo = new javax.swing.JLabel();
+        edtModelo = new javax.swing.JTextField();
+        lblAno = new javax.swing.JLabel();
+        edtAno = new javax.swing.JTextField();
+        lblPreco = new javax.swing.JLabel();
+        edtPreco = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lblTitulo.setFont(new java.awt.Font("Segoe UI", 3, 36)); // NOI18N
         lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitulo.setText("Cadastro de Pessoas");
+        lblTitulo.setText("Cadastro de Veículos");
 
         btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/novo-arquivo.png"))); // NOI18N
         btnNovo.setText("Novo");
@@ -128,67 +101,65 @@ public class FrCadPessoa extends javax.swing.JFrame {
         });
         panBotoes.add(btnSalvar);
 
-        lblNome.setText("Nome:");
+        edtListagem.setColumns(20);
+        edtListagem.setRows(5);
+        jScrollPane1.setViewportView(edtListagem);
 
-        lblCpf.setText("CPF:");
+        lblMarca.setText("Marca:");
 
-        lblIdade.setText("Idade:");
+        lblModelo.setText("Modelo:");
 
-        lblSexo.setText("Sexo:");
+        lblAno.setText("Ano:");
+
+        lblPreco.setText("Preço:");
 
         javax.swing.GroupLayout panDadosLayout = new javax.swing.GroupLayout(panDados);
         panDados.setLayout(panDadosLayout);
         panDadosLayout.setHorizontalGroup(
             panDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panDadosLayout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addGroup(panDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panDadosLayout.createSequentialGroup()
+                        .addComponent(lblMarca)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                    .addGroup(panDadosLayout.createSequentialGroup()
+                        .addComponent(lblAno)
+                        .addGap(16, 16, 16)))
+                .addGroup(panDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(edtAno)
+                    .addComponent(edtMarca, javax.swing.GroupLayout.DEFAULT_SIZE, 247, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
                 .addGroup(panDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panDadosLayout.createSequentialGroup()
+                        .addComponent(lblModelo)
                         .addGap(6, 6, 6)
-                        .addComponent(lblNome)
-                        .addGap(3, 3, 3)
-                        .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)
-                        .addComponent(lblCpf)
-                        .addGap(6, 6, 6)
-                        .addComponent(edtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(edtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panDadosLayout.createSequentialGroup()
-                        .addGap(7, 7, 7)
-                        .addComponent(lblIdade)
-                        .addGap(6, 6, 6)
-                        .addComponent(edtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblPreco)
                         .addGap(18, 18, 18)
-                        .addComponent(lblSexo)
-                        .addGap(6, 6, 6)
-                        .addComponent(edtSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(107, Short.MAX_VALUE))
+                        .addComponent(edtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         panDadosLayout.setVerticalGroup(
             panDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panDadosLayout.createSequentialGroup()
-                .addGap(6, 6, 6)
+                .addGap(9, 9, 9)
                 .addGroup(panDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(edtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panDadosLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(panDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNome)
-                            .addComponent(lblCpf))))
-                .addGap(12, 12, 12)
-                .addGroup(panDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(edtIdade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(edtSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panDadosLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addGroup(panDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblIdade)
-                            .addComponent(lblSexo))))
-                .addContainerGap(19, Short.MAX_VALUE))
+                    .addComponent(edtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblMarca)
+                        .addComponent(edtMarca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblModelo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblAno)
+                    .addGroup(panDadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(edtAno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblPreco)
+                        .addComponent(edtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
-
-        edtListagem.setColumns(20);
-        edtListagem.setRows(5);
-        jScrollPane1.setViewportView(edtListagem);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -215,36 +186,12 @@ public class FrCadPessoa extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(panDados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    public void objetoParaCampos(Pessoa pessoa){
-        edtNome.setText(pessoa.getNome());
-        edtCpf.setText(pessoa.getCpf());
-        edtIdade.setText(pessoa.getIdade() + "");
-        edtSexo.setText(pessoa.getSexo());
-    }
-    
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        this.cpfEscolhido = JOptionPane.showInputDialog("Informe o CPF: ", "");
-        Pessoa pessoaEditada = this.gerente.buscarPessoa(cpfEscolhido);
-        
-        if(pessoaEditada != null){
-            this.editando = true;
-            this.limparCampos();
-            this.habilitarCampos(true);
-            
-            objetoParaCampos(pessoaEditada);
-            
-        }else{
-            System.out.println("CPF inválido ou sem cadastro.");
-            JOptionPane.showMessageDialog(this , "CPF inválido ou sem cadastro.");
-        }
-    }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         this.limparCampos();
@@ -252,75 +199,102 @@ public class FrCadPessoa extends javax.swing.JFrame {
         this.editando = false;
     }//GEN-LAST:event_btnNovoActionPerformed
 
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        this.modeloEscolhido = JOptionPane.showInputDialog("Informe a marca do veículo: ", "");
+        Carro carroEditado = this.gerente.buscarCarro(modeloEscolhido);
+
+        if(carroEditado != null){
+            this.editando = true;
+            this.limparCampos();
+            this.habilitarCampos(true);
+
+            objetoParaCampos(carroEditado);
+
+        }else{
+            System.out.println("Marca de veículo inválida ou sem cadastro.");
+            JOptionPane.showMessageDialog(this , "Marca de veículo inválida ou sem cadastro.");
+        }
+    }//GEN-LAST:event_btnEditarActionPerformed
+
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.limparCampos();
         this.habilitarCampos(false);
         this.editando = false;
     }//GEN-LAST:event_btnCancelarActionPerformed
-    
-    public Pessoa camposParaObjeto(){
-        Pessoa pessoa = new Pessoa();
-        pessoa.setNome(edtNome.getText());
-        pessoa.setCpf(edtCpf.getText());
-        pessoa.setSexo(edtSexo.getText());
-        
-        String idadeStr = edtIdade.getText();
-        if(!idadeStr.isEmpty()){
-            int idade = Integer.parseInt(idadeStr);
-            pessoa.setIdade(idade);
-        }
-        return pessoa;
-    }
-    
-    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        Pessoa novaPessoa = this.camposParaObjeto();
-        
-        if(this.editando == true)
-            this.gerente.atualizarPessoa(this.cpfEscolhido , novaPessoa);
-        else
-            this.gerente.adicionarPessoa(novaPessoa);
-        
-        this.limparCampos();
-        this.habilitarCampos(false);
-        this.editando = false;
-        
-        String listagem = gerente.toString();
-        edtListagem.setText(listagem);
-        
-        gerente.salvarEmXML("ListagemPessoas.xml"); // Isso salva em arquivo xml
-      //gerente.salvarNoArquivo("ListagemPessoas.json"); //Isso salva em arquivo .json
-    }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        this.cpfEscolhido = JOptionPane.showInputDialog("Informe o CPF: ", "");
-        
-        Pessoa pessoa = this.gerente.buscarPessoa(cpfEscolhido);
-        
-        if(pessoa == null){
-            JOptionPane.showMessageDialog(this, "CPF inválido ou sem cadastro.");
+        this.modeloEscolhido = JOptionPane.showInputDialog("Informe a marca do veículo: ", "");
+
+        Carro carro = this.gerente.buscarCarro(modeloEscolhido);
+
+        if(carro == null){
+            JOptionPane.showMessageDialog(this, "Marca do veículo inválido ou sem cadastro.");
         }else{
-            this.gerente.removerPessoa(cpfEscolhido);
-            JOptionPane.showMessageDialog(this, "CPF excluído com sucesso");
+            this.gerente.removerCarro(modeloEscolhido);
+            JOptionPane.showMessageDialog(this, "Marca do veículo excluído com sucesso");
         }
         String listagem = this.gerente.toString();
         edtListagem.setText(listagem);
     }//GEN-LAST:event_btnExcluirActionPerformed
-    
-    public void habilitarCampos(boolean flag){
-        this.edtNome.setEnabled(flag);
-        this.edtCpf.setEnabled(flag);
-        this.edtIdade.setEnabled(flag);
-        this.edtSexo.setEnabled(flag);
+
+    private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
+        Carro novoCarro = this.camposParaObjeto();
+
+        if(this.editando == true)
+        this.gerente.atualizarCarro(this.modeloEscolhido , novoCarro);
+        else
+        this.gerente.adicionarCarro(novoCarro);
+
+        this.limparCampos();
+        this.habilitarCampos(false);
+        this.editando = false;
+
+        String listagem = gerente.toString();
+        edtListagem.setText(listagem);
+
+        //gerente.salvarEmXML("ListagemCarros.xml"); // Isso salva em arquivo xml
+        //gerente.salvarNoArquivo("ListagemCarros.json"); //Isso salva em arquivo .json
+        gerente.salvarEmCSV("ListagemCarros.csv"); // Isso salva em arquivo CSV
+    }//GEN-LAST:event_btnSalvarActionPerformed
+    public void objetoParaCampos(Carro carro){
+        edtMarca.setText(carro.getMarca());
+        edtModelo.setText(carro.getModelo());
+        edtAno.setText(carro.getAno() + "");
+        edtPreco.setText(carro.getPreco() + "");
     }
-    public void limparCampos(){
-        this.edtNome.setText("");
-        this.edtCpf.setText("");
-        this.edtIdade.setText("");
-        this.edtSexo.setText("");
+    public Carro camposParaObjeto(){
+        Carro carro = new Carro();
+        carro.setMarca(edtMarca.getText());
+        carro.setModelo(edtModelo.getText());
+        
+        String anoStr = edtAno.getText();
+        if(!anoStr.isEmpty()){
+            int ano = Integer.parseInt(anoStr);
+            carro.setAno(ano);
+        }
+        
+        String precoStr = edtPreco.getText();
+        if(!precoStr.isEmpty()){
+            double preco = Double.parseDouble(precoStr);
+            carro.setPreco(preco);
+        }
+        return carro;
     }
     /**
      * @param args the command line arguments
      */
+    public void habilitarCampos(boolean flag){
+        this.edtMarca.setEnabled(flag);
+        this.edtModelo.setEnabled(flag);
+        this.edtAno.setEnabled(flag);
+        this.edtPreco.setEnabled(flag);
+    }
+    public void limparCampos(){
+        this.edtMarca.setText("");
+        this.edtModelo.setText("");
+        this.edtAno.setText("");
+        this.edtPreco.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -328,16 +302,16 @@ public class FrCadPessoa extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
-    private javax.swing.JTextField edtCpf;
-    private javax.swing.JTextField edtIdade;
+    private javax.swing.JTextField edtAno;
     private javax.swing.JTextArea edtListagem;
-    private javax.swing.JTextField edtNome;
-    private javax.swing.JTextField edtSexo;
+    private javax.swing.JTextField edtMarca;
+    private javax.swing.JTextField edtModelo;
+    private javax.swing.JTextField edtPreco;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblCpf;
-    private javax.swing.JLabel lblIdade;
-    private javax.swing.JLabel lblNome;
-    private javax.swing.JLabel lblSexo;
+    private javax.swing.JLabel lblAno;
+    private javax.swing.JLabel lblMarca;
+    private javax.swing.JLabel lblModelo;
+    private javax.swing.JLabel lblPreco;
     private javax.swing.JLabel lblTitulo;
     private javax.swing.JPanel panBotoes;
     private javax.swing.JPanel panDados;

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Imóveis>
+    <Imóvel>
+        <preco>700000.0</preco>
+        <qtdBanheiros>1</qtdBanheiros>
+        <qtdQuartos>3</qtdQuartos>
+        <tamArea>400.0</tamArea>
+        <tipoImovel>Casa</tipoImovel>
+    </Imóvel>
+    <Imóvel>
+        <preco>2.0E7</preco>
+        <qtdBanheiros>3</qtdBanheiros>
+        <qtdQuartos>5</qtdQuartos>
+        <tamArea>600.0</tamArea>
+        <tipoImovel>Apartamento</tipoImovel>
+    </Imóvel>
+</Imóveis>

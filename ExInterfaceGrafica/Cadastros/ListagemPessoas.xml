@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Pessoas>
+    <Pessoa>
+        <cpf>1234</cpf>
+        <idade>12</idade>
+        <nome>Fulano</nome>
+        <sexo>M</sexo>
+    </Pessoa>
+    <Pessoa>
+        <cpf>12345</cpf>
+        <idade>54</idade>
+        <nome>Ciclano</nome>
+        <sexo>F</sexo>
+    </Pessoa>
+    <Pessoa>
+        <cpf>1289</cpf>
+        <idade>23</idade>
+        <nome>Beltrano</nome>
+        <sexo>F</sexo>
+    </Pessoa>
+    <Pessoa>
+        <cpf>8980</cpf>
+        <idade>45</idade>
+        <nome>Angolono</nome>
+        <sexo>M</sexo>
+    </Pessoa>
+    <Pessoa>
+        <cpf>12345464</cpf>
+        <idade>26</idade>
+        <nome>Rangel</nome>
+        <sexo>M</sexo>
+    </Pessoa>
+    <Pessoa>
+        <cpf>1234343434</cpf>
+        <idade>23</idade>
+        <nome>Leonidas</nome>
+        <sexo>M</sexo>
+    </Pessoa>
+</Pessoas>
